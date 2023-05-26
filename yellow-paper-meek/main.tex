@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amssymb}
 \usepackage{bm}
@@ -7,6 +8,11 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{geometry}
+\usepackage{blindtext}
+\usepackage{color}
+\definecolor{yellow}{HTML}{FEFAE0}
+\pagecolor{yellow}
+\color{black}
 % \usepackage{showframe} % This line can be used to clearly show the new margins %
 \newgeometry{vmargin={25mm}, hmargin={25mm,25mm}} 
 \hypersetup{
@@ -31,7 +37,7 @@ Advanced solidity bootcamp with Dominik Teiml. Summary of \href{https://ethereum
 \section{Chapter 2}
 \section{Chapter 3}
 \begin{itemize}
-    \item$\bm{\sigma}$ - (sigma) World state
+    \item $\bm{\sigma}$ - (sigma) World state
     \item $\bm{\mu}$ - (mu) Machine state
     \item $\bm{\Upsilon}$ - (upsilon) Ethereum state transition
     \item $C$ - General cost function
@@ -341,7 +347,32 @@ $Accrued \text{ } substate$ ($A$) is the information that is acted upon immediat
 \subsection{Execution}
 
 \begin{itemize}
-    \item[$-$] $g_0$ - amount of gas this transaction requires to be paid prior to execution
+    \item[$-$] $g_0$ - amount of gas this transaction requires to be paid prior to execution, intrinsic gas $g_0$
+    \begin{align*}     
+        g_0 \equiv \sum_{i \in T_i, T_d} \biggl\{
+            \begin{array}{ll}
+                G_{txdatazero} \text{ if } i=0\\
+                G_{txdatanonzero} \text{ otherwise }\\
+            \end{array}
+            + \biggl\{
+                \begin{array}{ll}
+                    G_{txzero} \text{ if } T_t = \varnothing \\
+                    0 \text{ otherwise} \\
+                \end{array} \\
+            + G_{transaction} 
+            + \sum_{j=0}^{\parallel T_A \parallel - 1} 
+            (G_{accesslistaddress} 
+            + \| T_A[j]_s \| G_{accessliststorage})
+    \end{align*}
+    \begin{itemize}
+        \item $T_i, T_d$ is the series of bytes of the transaction's associated data and initialisation EVM-code
+        \item $G_{txcreate}$ iis addres if the transaction is creating a contract
+        \item $G_{accesslistaddress}$ and $G_{accessliststorage}$ are the cost of warming up account and storage access
+        \item $G$ (defined in appendix G) - is a tuple of scalar values corresponding to relative costs in gas of operations 
+        \begin{itemize}
+            \item 
+        \end{itemize}
+    \end{itemize}
     % \item[$-$] 
     % \item[$-$] 
     % \item[$-$] 
