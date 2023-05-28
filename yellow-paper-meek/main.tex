@@ -11,7 +11,7 @@
 \usepackage{blindtext}
 \usepackage{color}
 \definecolor{yellow}{HTML}{FEFAE0}
-\pagecolor{yellow}
+\pagecolor{white}
 \color{black}
 % \usepackage{showframe} % This line can be used to clearly show the new margins %
 \newgeometry{vmargin={25mm}, hmargin={25mm,25mm}} 
@@ -369,15 +369,58 @@ $Accrued \text{ } substate$ ($A$) is the information that is acted upon immediat
         \item $G_{txcreate}$ iis addres if the transaction is creating a contract
         \item $G_{accesslistaddress}$ and $G_{accessliststorage}$ are the cost of warming up account and storage access
         \item $G$ (defined in appendix G) - is a tuple of scalar values corresponding to relative costs in gas of operations 
-        \begin{itemize}
-            \item 
-        \end{itemize}
+        \begin{table}[ht!]
+        \begin{center}
+            \begin{tabular}{l r p{0.71\linewidth}}
+                \hline
+                Name & Value & Description \\
+                \hline \\
+                    $G_{zero}$ & $0$ & 0 gas operations of the set $W_{zero}$ = \{STOP, RETURN, REVERT\} \\
+                    $G_{jumpdest}$ & $1$ & gas paid for JUMPDEST operation \\
+                    $G_{base}$ & $2$ & gas paid for operations of set $W_{base}$ = \{ADDRESS, ORIGIN, CALLER, CALLVALUE, CALLDATASIZE, CODESIZE, COINBASE, TIMESTAMP, NUMBER, DIFFICULTY, GASLIMIT, CAHINID, RETURNDATASIZE, POP, POP, MSIZE, Gas\} \\
+                    $G_{verylow}$ & $3$ & gas paid for operations of set $W_{verylow}$ = \{ADD, SUB, NOT, LT, GT, SLT, SGT, EQ, ISZERO, AND, OR, XOR, BYTE, SHL, SHR, SAR, CALLDATALOAD, MLOAD, MSTORE, MSTORE8, PUSH*, DUP*, SWAP*\} \\
+                    $G_{low}$ & $5$ & gas paid for operations of set $W_{low}$ = \{MUL, DIV, SDIV, MOD, SMOD, SIGNEXTEND, SELFBALANCE\} \\ 
+                    $G_{mid}$ & $8$ & gas paid for operations of set $W_{mid}$ = \{ADDMOD, MULMOD, JUMP\} \\
+                    $G_{high}$ & $10$ & gas paid for operations of set $W_{high}$ = \{JUMPI\} \\
+                    $G_{warmaccess}$ & $100$ & cost for a warm account or storage \\
+                    $G_{accesslistaddress}$ & $2400$ & cost for warming up an account with the acess list \\
+                    $G_{accessliststorage}$ & $1900$ & cost for warming up a storage with the access list \\
+                    $G_{coldaccountaccess}$ & $2600$ & cost for a cold accoung access \\
+                    $G_{coldload}$ & $2100$ & cost for a cold account access \\
+                    $G_{sset}$ & $20000$ & cost for an SSTORE operation from non-zero to zero \\
+                    $G_{sreset}$ & $2900$ & cost for an SSTORE operation from zero to zero (unchanged) \\
+                    $R_{sclear}$ & $15000$ & refund when SSTORE operation on a storage is set from non-zero to zero \\
+                    $R_{selfdestruct}$ & $24000$ & refund for self-destructing and account \\
+                    $G_{selfdescturct}$ & $5000$ & gas paid for a SELFDESTRUCT operation \\
+                    $G_{create}$ & $32000$ & gas paid for a CREATE operation \\
+                    $G_{codedeposit}$ & $200$ & cost paid per byte for a CREATE operation to success in placing code to state \\
+                    $G_{callvalue}$ & $9000$ & gas paid for a non-zero value transfer as part of the CALL operation \\
+                    $G_{callstipend}$ & $2300$ & a stipend for the called contract subtracted from the $G_{callvalue}$ for a non-zero value \\
+                    $G_{newaccount}$ & $25000$ & gas paid for a CALL or SELFDESTRUCT operations which creates a new account \\
+                    $G_{exp}$ & $10$ & partial  payment for an EXP operations \\
+                    $G_{expbye}$ & $50$ & partial payment when multiplied by the number of bytes in the exponent for EXP operation \\
+                    $G_{memory}$ & $3$ & gas paid for every additional word when expanding memory \\
+                    $G_{txcreate}$ & $32000$ & gas paid by all contract-creating transactions after \textit{Honstead} transition \\
+                    $G_{txdatazero}$ & $4$ & gas paid for every zero bytes of data or code for a transaction \\
+                    $G_{txdatanonzero}$ & $16$ & gas paid for every non-zero bytes of data or code for a transaction \\
+                    $G_{transaction}$ & $21000$ & gas paid for every transaction \\
+                    $G_{log}$ & $375$ & partial payment for a LOG operation  \\
+                    $G_{logdata}$ & $8$ & gas paid for each bytes in a LOG operation's data \\
+                    $G_{logtopic}$ & $375$ & gas paid for each topic of a LOF operation \\
+                    $G_{keccak256}$ & $30$ & gas paid for each KECCAK256 operation \\
+                    $G_{keccak256word}$ & $60$ & gas paid for each word (rounded up) for input data to a KECCAK256 operation \\
+                    $G_{copy}$ & $3$ & partial payment for set $W_{copy}$ = \{CALLDATACOPY, CODECOPY, RETURNDATACOPY\} operations, multiplied by words copied, rounded up \\
+                    $G_{blockhash}$ & $20$ & gas pid for each BLOCKHASH operation\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
     \end{itemize}
-    % \item[$-$] 
-    % \item[$-$] 
-    % \item[$-$] 
-    % \item[$-$] 
-    % \item[$-$] 
+    \item[$-$] $C$  - the general \textbf{gas cost}  function 
+    \item[$-$] 
+    \item[$-$] 
+    \item[$-$] 
+    \item[$-$] 
 \end{itemize}
 
 \end{document}

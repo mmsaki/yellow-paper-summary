@@ -2,7 +2,6 @@
 *.fls
 *.out
 *.aux
-*.fbg_latexmk
 *.gz
 *.log
-main.fbg_latexmk
+main.fdb_latexmk
