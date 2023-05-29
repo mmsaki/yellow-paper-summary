@@ -10,8 +10,8 @@
 \usepackage{geometry}
 \usepackage{blindtext}
 \usepackage{color}
-\definecolor{yellow}{HTML}{FEFAE0}
-\pagecolor{white}
+\definecolor{yellow}{HTML}{FCF6E5}
+\pagecolor{yellow}
 \color{black}
 % \usepackage{showframe} % This line can be used to clearly show the new margins %
 \newgeometry{vmargin={25mm}, hmargin={25mm,25mm}} 
@@ -136,7 +136,7 @@ Advanced solidity bootcamp with Dominik Teiml. Summary of \href{https://ethereum
         \item $T_d$ - data byte array specifying input data of a message call, $T_d \in \mathbb{B}$
 
     \end{itemize}
-    \includegraphics[width=\textwidth]{EIP1559.png}
+    % \includegraphics[width=\textwidth]{EIP1559.png}
     
     \underline{EIP-2930 (type 1) transactions also have:}
     \begin{itemize}
@@ -145,7 +145,7 @@ Advanced solidity bootcamp with Dominik Teiml. Summary of \href{https://ethereum
         \item $T_y$ - yParity signature 
     \end{itemize}
     
-    \includegraphics[width=\textwidth]{EIP2930.png}
+    % \includegraphics[width=\textwidth]{EIP2930.png}
     
 \end{itemize}
 
@@ -364,12 +364,15 @@ $Accrued \text{ } substate$ ($A$) is the information that is acted upon immediat
             (G_{accesslistaddress} 
             + \| T_A[j]_s \| G_{accessliststorage})
     \end{align*}
-    \begin{itemize}
-        \item $T_i, T_d$ is the series of bytes of the transaction's associated data and initialisation EVM-code
-        \item $G_{txcreate}$ iis addres if the transaction is creating a contract
-        \item $G_{accesslistaddress}$ and $G_{accessliststorage}$ are the cost of warming up account and storage access
-        \item $G$ (defined in appendix G) - is a tuple of scalar values corresponding to relative costs in gas of operations 
-        \begin{table}[ht!]
+        \item[$-$] $T_i, T_d$ is the series of bytes of the transaction's associated data and initialisation EVM-code
+        \item[$-$] $G_{txcreate}$ is added if the transaction is creating a contract, but not if a result of EVM-code 
+        \item[$-$] $G_{accesslistaddress}$ and $G_{accessliststorage}$ are the cost of warming up account and storage access
+        \item[$-$] $G$ (defined in appendix G) - is a tuple of scalar values corresponding to relative costs in gas of operations 
+        \item[$-$] $v_0$ - upfront cost is $v_0 \equiv T_gT_p + T_v$
+        \item[$-$] $S(T)$ - the sender of a transaction
+        \item[$-$] Validity of transaction is determine $S(T) \neq \varnothing$ $\wedge$ $\sigma[S(T)]_c = KEC(())$ $\wedge$ $T_n = \sigma[S(T)]_n$ $\wedge$ $g_0 \leq T_g$ $\wedge$ $V_0 \leq \sigma[S(T)]_b$ $\wedge$ $T_g \leq B_{HI} - \ell(B_R)_u$
+        \item[$-$] $T_g - g_0$
+        \begin{table}
         \begin{center}
             \begin{tabular}{l r p{0.71\linewidth}}
                 \hline
@@ -415,12 +418,7 @@ $Accrued \text{ } substate$ ($A$) is the information that is acted upon immediat
             \end{tabular}
         \end{center}
     \end{table}
-    \end{itemize}
-    \item[$-$] $C$  - the general \textbf{gas cost}  function 
-    \item[$-$] 
-    \item[$-$] 
-    \item[$-$] 
-    \item[$-$] 
+    \item[$-$] end
 \end{itemize}
 
 \end{document}
