@@ -11,10 +11,12 @@
 \usepackage{blindtext}
 \usepackage{color}
 \definecolor{yellow}{HTML}{FCF6E5}
-\pagecolor{yellow}
+\pagecolor{white}
 \color{black}
+% \usepackage[a4paper,width=170mm,top=18mm,bottom=22mm,includeheadfoot]{geometry}
+
 % \usepackage{showframe} % This line can be used to clearly show the new margins %
-\newgeometry{vmargin={25mm}, hmargin={25mm,25mm}} 
+\newgeometry{vmargin={20mm,20mm}, hmargin={18mm,22mm}} 
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -332,7 +334,7 @@ The Block, $B \equiv (B_H, B_T, B_U)$, is a collection of the following relevant
 $Accrued \text{ } substate$ ($A$) is the information that is acted upon immediately following the transaction execution
 
 \begin{itemize}
-    \item[$-$] $A \equiv (A_s, A_l, A_t, A_r, A_a, A_K)$ - $A$ is a tuple
+    \item[$-$] $A \equiv (A_s, A_l, A_t, A_r, A_a, A_K)$
     \item[$-$] $A_s$ - the self destruct set, a set of accounts that will be discarded following transaction completion
     \item[$-$] $A_l$ - log series of archived and indexable 'checkpoints' in VM code execution
     \item[$-$] $A_t$ - set of touched accounts, which the empty ones are deleted at the end of transaction
@@ -341,7 +343,7 @@ $Accrued \text{ } substate$ ($A$) is the information that is acted upon immediat
     \item[$-$] $A_K$ - a tuple of a 20-byte account address and a 32-byte storage slot (a set of storage keys) 
     \item[$-$] $A^0$ - an empty accrued substate
     \item[$-$] $A^0 \equiv (\varnothing, (), \varnothing, 0, \pi, \varnothing)$, where: $\pi$ is a set of precompiled addresses
-    \item[$-$] $\pi$ - a set of all precompiled addresses 
+    \item[$-$] $\pi$ - a set of all precompiled addresses
 \end{itemize}
 
 \subsection{Execution}
@@ -372,6 +374,8 @@ $Accrued \text{ } substate$ ($A$) is the information that is acted upon immediat
         \item[$-$] $S(T)$ - the sender of a transaction
         \item[$-$] Validity of transaction is determine $S(T) \neq \varnothing$ $\wedge$ $\sigma[S(T)]_c = KEC(())$ $\wedge$ $T_n = \sigma[S(T)]_n$ $\wedge$ $g_0 \leq T_g$ $\wedge$ $V_0 \leq \sigma[S(T)]_b$ $\wedge$ $T_g \leq B_{HI} - \ell(B_R)_u$
         \item[$-$] $T_g - g_0$
+        \item[$-$] Before table 
+
         \begin{table}
         \begin{center}
             \begin{tabular}{l r p{0.71\linewidth}}
@@ -418,7 +422,8 @@ $Accrued \text{ } substate$ ($A$) is the information that is acted upon immediat
             \end{tabular}
         \end{center}
     \end{table}
-    \item[$-$] end
+    \clearpage
+    \item[$-$] After table
 \end{itemize}
 
 \end{document}
